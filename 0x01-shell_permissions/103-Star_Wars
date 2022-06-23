@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R 755 stream/
+mpv --no-config --vo=tct https://youtu.be/vZ734NWnAHA
