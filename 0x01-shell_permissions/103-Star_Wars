@@ -1,2 +1,2 @@
 #!/bin/bash
-mpv --no-config --vo=tct https://youtu.be/vZ734NWnAHA
+telnet towel.blinkenlights.nl
