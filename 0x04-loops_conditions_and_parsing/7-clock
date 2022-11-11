@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #print clock
 
-hour=1
+hour=0
 while [ $hour -lt 13 ];
 do
 	echo "hour: $hour"
@@ -11,7 +11,5 @@ do
 		echo "$min"
 		min=$((min + 1))
 	done
-	min=$min
 	hour=$((hour + 1))
 done
-hour=$hour
