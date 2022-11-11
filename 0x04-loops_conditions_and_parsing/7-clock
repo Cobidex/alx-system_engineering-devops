@@ -11,5 +11,7 @@ do
 		echo "$min"
 		min=$((min + 1))
 	done
+	min=$min
 	hour=$((hour + 1))
 done
+hour=$hour
