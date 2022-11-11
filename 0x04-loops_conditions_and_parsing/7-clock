@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 #print clock
 
-i=0
-j=1
-while [ $i -le 12 ];
+hour=0
+while [ $hour -le 12 ];
 do
-	echo "hour: $i"
-	j=1
-	while [ $j -le 59 ];
+	echo "Hour: $i"
+	min=1
+	while [ $min -le 59 ];
 	do
-		echo "$j"
-		j=$((j + 1))
+		echo "$min"
+		min=$((min + 1))
 	done
-	i=$((i + 1))
+	hour=$((hour + 1))
 done
-j=$j
