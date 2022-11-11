@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#prints with while loop
+
+var=1
+while [ $var -lt 21 ];
+do
+	echo "$var"
+	case $var in
+	4)
+		echo "bad luck from China"
+		;;
+	9)
+		echo "bad luck from Japan"
+		;;
+	17)
+		echo "bad luck from Italy"
+		;;
+	esac
+	var=$((var + 1))
+done
