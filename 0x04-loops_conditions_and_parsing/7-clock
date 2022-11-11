@@ -9,7 +9,7 @@ do
 	while [ $min -lt 60 ];
 	do
 		echo "$min"
-		min=$(( min + 1))
+		min=$((min + 1))
 	done
 	hour=$((hour + 1))
 done
