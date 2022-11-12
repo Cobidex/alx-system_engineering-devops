@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#print username,id and path
+
+exec 3< /etc/passwd
+while read -ru 3;
+do
+	echo "$REPLY" | cut -d ':' -f1,3,6
+done
