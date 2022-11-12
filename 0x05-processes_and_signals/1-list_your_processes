@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #print current processes
 
-ps -u
+ps -axu
