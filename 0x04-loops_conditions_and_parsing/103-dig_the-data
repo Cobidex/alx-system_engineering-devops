@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #filter out ip address and HTTP status code
 
-awk '{print $1,$9}' apache-access.log | uniq -c | sort -r
+awk '{print $1,$9}' apache-access.log | sort | uniq -c | sort -nr
