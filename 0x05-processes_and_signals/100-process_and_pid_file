@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 #create process recieve signals and terminate
 file=/var/run/myscript.pid
-trap "echo I hate the kill command; rm $file; exit" SIGTERM
-trap "echo Y U no love me?!" SIGINT
-trap "rm $file; exit" SIGQUIT
-touch $file
+trap 'echo I hate the kill command; rm $file; exit' SIGTERM
+trap 'echo Y U no love me?!' SIGINT
+trap 'rm $file; exit' SIGQUIT
 echo $$ > "$file"
 while true;
 do
