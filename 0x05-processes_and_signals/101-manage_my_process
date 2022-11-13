@@ -20,13 +20,13 @@ then
 
 elif [ "$1" == "stop" ]
 then
-	pkill -f manage_my_process
+	kill "$(cat file)"
 	rm "$file"
 	echo "manage_my_process stopped"
 
-elif [ "$1" ==	"restart" ]
+elif [ "$1" == "restart" ]
 then
-	pkill -f manage_my_process
+	kill "$(cat file)"
 	rm "$file"
 	./manage_my_process &
 	echo "$!" > "$file"
