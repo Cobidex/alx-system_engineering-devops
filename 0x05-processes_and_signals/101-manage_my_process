@@ -6,12 +6,15 @@ then
 	echo "Usage: manage_my_process {start|stop|restart}"
 	exit $?
 fi
-if [ "$1" != "start" ] && [ "$1" != "stop" ] && [ "$1" != "restart" ];
+
+if [ "$1" != "start" ] && [ "$1" != "stop" ] && [ "$1" != "restart" ]
 then
 	echo "Usage: manage_my_process {start|stop|restart}"
 	exit $?
 fi
+
 file=/var/run/my_process.pid
+
 if [ "$1" == "start" ]
 then
 	./manage_my_process &
@@ -31,4 +34,5 @@ then
 	./manage_my_process &
 	echo "$!" > "$file"
 	echo "manage_my_process restarted"
+
 fi
