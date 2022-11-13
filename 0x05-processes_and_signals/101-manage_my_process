@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #init script to manage a process
 
-if [ "$#" -ne 1 ];
+if [ "$#" -ne 1 ]
 then
 	echo "Usage: manage_my_process {start|stop|restart}"
 	exit $?
