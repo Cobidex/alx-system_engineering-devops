@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Script to create an RSA key pair
+
+PRIVATE_KEY_NAME="school"
+KEY_BITS="4096"
+
+PASSPHRASE="betty"
+
+ssh-keygen -t rsa -b $KEY_BITS -f $PRIVATE_KEY_NAME -N $PASSPHRASE
