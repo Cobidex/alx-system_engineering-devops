@@ -1,7 +1,7 @@
 # create a file with content
 
 file { '/tmp/school':
-  ensure  => 'file',
+  ensure  => file,
   mode    => '0744',
   owner   => 'www-data',
   group   => 'www-data',
