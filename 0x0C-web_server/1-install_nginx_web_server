@@ -20,8 +20,8 @@ sudo echo "server {
                	return 200
 	'Hello World!';
         }
-}" | sudo tee /etc/nginx/site-available/default
+}" | sudo tee /etc/nginx/sites-available/default
 
-sudo ln -s /etc/nginx/site-available/default /etc/nginx/site-enabled/
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 sudo service restart nginx
