@@ -2,11 +2,15 @@
 # install and configure nginx server
 
 
-sudo apt update
+sudo apt-get update
 
-sudo apt install nginx -y
+sudo apt-get upgrade
 
-sudo echo "server {
+sudo apt-get install nginx -y
+
+sudo rm /etc/nginx/sites-available/default
+
+sudo bash -c 'echo "server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
@@ -17,11 +21,13 @@ sudo echo "server {
         server_name _;
 
         location / {
-               	return 200
-	'Hello World!';
-        }
-}" | sudo tee /etc/nginx/sites-available/default
+            try_files \$uri
+\$uri/ =404;
+    }
+}" > /etc/nginx/sites-available/default'
+
+sudo bash -c 'echo "Hello World!" > /var/www/html/index.html'
 
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
-sudo service restart nginx
+sudo service nginx restart
