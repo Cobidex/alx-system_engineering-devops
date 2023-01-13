@@ -14,7 +14,7 @@ sudo bash -c 'echo "server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        root /var/www/html;
+        root /;
 
         index index.html index.htm index.nginx-debian.html;
 
@@ -26,7 +26,7 @@ sudo bash -c 'echo "server {
     }
 }" > /etc/nginx/sites-available/default'
 
-sudo bash -c 'echo "Hello World!" > /var/www/html/index.html'
+sudo bash -c 'echo "Hello World!" > ~/index.html'
 
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
