@@ -1,19 +1,26 @@
 # install nginx and configure it
 
-package { 'nginx':
-  ensure => 'installed',
+exec { 'update':
+  command => 'sudo apt-get update',
 }
 
-service { 'nginx':
-  ensure => 'running',
-  enable => true,
+exec { 'upgrade':
+  command => 'sudo apt-get upgrade -y',
+}
+
+exec { 'nginx':
+  command => 'sudo apt-get install nginx -y',
+}
+
+exec { 'rm_default':
+  command => 'sudo rm /etc/nginx/sites-available/default',
 }
 
 file { '/etc/nginx/sites-available/default':
-  ensure  => 'file',
-  mode    => '0644',
-  content => 'server {
-        listen 80 default_server;
+  ensure  => file,
+  mode    => '0755',
+  content => "server {
+	listen 80 default_server;
         listen [::]:80 default_server;
 
         root /var/www/html;
@@ -31,7 +38,7 @@ file { '/etc/nginx/sites-available/default':
             return 301
         https://www.youtube.com/watch?v=QH2-TGUlwu4;
         }
-	}',
+	}",
 }
 
 exec { 'create_symb_link':
