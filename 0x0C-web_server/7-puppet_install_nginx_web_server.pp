@@ -1,50 +1,34 @@
-# install nginx and configure it
-
-exec { 'update':
-  command => 'sudo apt-get update',
+# Install Nginx package
+package { 'nginx':
+  ensure => 'installed',
 }
 
-exec { 'upgrade':
-  command => 'sudo apt-get upgrade -y',
-}
-
-exec { 'nginx':
-  command => 'sudo apt-get install nginx -y',
-}
-
-exec { 'rm_default':
-  command => 'sudo rm /etc/nginx/sites-available/default',
+service { 'nginx':
+  ensure => 'running',
+  enable => true,
 }
 
 file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  mode    => '0755',
-  content => "server {
-	listen 80 default_server;
-        listen [::]:80 default_server;
+  ensure  => 'file',
+  content => '
+server {
+    listen 80;
+    root /var/www/html;
+    index index.html;
+    server_name _;
 
-        root /var/www/html;
-
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name _;
-
-        location / {
-                return 200
-        \"Hello World\";
-        }
-
-        location /redirect_me {
-            return 301
-        https://www.youtube.com/watch?v=QH2-TGUlwu4;
-        }
-	}",
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    location /redirect_me {
+        return 301 /;
+    }
+}',
+  notify  => Service['nginx'],
 }
 
-exec { 'create_symb_link':
-  command => 'sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/',
-}
-
-exec { 'start':
-  command => 'sudo service nginx restart',
+file { '/var/www/html/index.html':
+  ensure  => 'file',
+  content => 'Hello World!',
+  notify  => Service['nginx'],
 }
