@@ -8,6 +8,8 @@ sudo apt-get upgrade
 
 sudo apt-get install nginx -y
 
+sudo bash -c 'echo "Ceci n'\''est pas une page" > /usr/share/nginx/html/error.html'
+
 sudo bash -c 'echo "server {
         listen 80 default_server;
         listen [::]:80 default_server;
@@ -18,19 +20,17 @@ sudo bash -c 'echo "server {
 
         server_name _;
 
-	location / {
-		return 200
-	\"Hello World\";
-	}
 
         location /redirect_me {
             return 301
 	https://www.youtube.com/watch?v=QH2-TGUlwu4;
 	}
+	
+	error_page 404 /error.html;
 
-	location /not_found {
-		return 404
-	\"Ceci n'\''est pas une page\"
+	location = /error.html {
+		root /usr/share/nginx/html;
+		internal;
 	}
 }" > /etc/nginx/sites-available/default'
 
