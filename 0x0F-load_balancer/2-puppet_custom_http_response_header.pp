@@ -10,8 +10,11 @@ package { 'nginx':
   provider => 'apt',
 }
 
-exec { 'modify':
-  command => 'sudo sed -i "s/http {/&\\n\\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf',
+file_line { 'nginx.conf':
+  ensure => present,
+  path   => '/etc/nginx'
+  line   => 'http {\n\tadd_header X-Served-By $HOSTNAME;'
+  match  => 'http {'
 }
 
 exec { 'restart':
