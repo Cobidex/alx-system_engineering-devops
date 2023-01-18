@@ -19,7 +19,3 @@ file_line { 'header':
 exec { 'restart':
   command => 'service nginx restart',
 }
-
-service { 'nginx':
-  ensure => running,
-}
