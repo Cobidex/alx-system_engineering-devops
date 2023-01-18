@@ -2,6 +2,7 @@
 
 package { 'nginx':
   ensure   => 'installed',
+  enable   => True,
   provider => 'apt',
 }
 
