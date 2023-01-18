@@ -1,7 +1,7 @@
 # automate the task of creating a custom HTTP header response
 
 exec { 'update':
-  command => 'sudo apt-get update',
+  command => 'apt-get update',
 }
 
 package { 'nginx':
@@ -17,7 +17,7 @@ file_line { 'header':
 }
 
 exec { 'restart':
-  command => 'sudo service nginx restart',
+  command => 'service nginx restart',
 }
 
 service { 'nginx':
