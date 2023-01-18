@@ -36,7 +36,7 @@ sudo bash -c 'echo "server {
 	}
 }" > /etc/nginx/sites-available/default'
 
-sudo sed -i 's/http {/&\n       add_header X-Served-By $hostname;/' /etc/nginx/nginx.conf
+sudo sed -i "s/http {/&\\n\\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
 
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
