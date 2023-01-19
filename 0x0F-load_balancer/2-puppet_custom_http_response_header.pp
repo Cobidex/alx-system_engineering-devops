@@ -1,22 +1,16 @@
-# automate the task of creating a custom HTTP header response
-exec { 'update':
-  command  => 'sudo apt-get update',
-  provider => shell,
-}
-
+# configuer custom header for nginx web server
 package { 'nginx':
-  ensure  => 'installed',
-  require => Exec['update'],
+  ensure => 'installed',
 }
 
-file_line { 'header':
-  path    => '/etc/nginx/nginx.conf',
-  line    => 'http {\n\tadd_header X-Served-By $HOSTNAME;',
-  match   => 'http {',
+file { '/etc/nginx/conf.d/custom_headers.conf':
+  ensure  => file,
+  content => 'add_header X-Served-By $hostname;',
   require => Package['nginx'],
+  notify  => Service['nginx'],
 }
 
-exec { 'restart':
-  command => 'service nginx restart',
-  require => File_line['header'],
+service { 'nginx':
+  ensure => running,
+  enable => true,
 }
