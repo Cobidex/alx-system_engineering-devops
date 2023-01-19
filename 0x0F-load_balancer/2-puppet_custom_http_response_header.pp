@@ -1,21 +1,19 @@
 # automate the task of creating a custom HTTP header response
-
-exec { 'update':
+exec {'update':
   command => 'apt-get update',
 }
 
--> package { 'nginx':
-  ensure   => 'installed',
-  enable   => True,
-  provider => 'apt',
+package {'nginx':
+    ensure   => 'installed',
 }
 
--> file_line { 'header':
+file_line {'header':
   path  => '/etc/nginx/nginx.conf',
   line  => 'http {\n\tadd_header X-Served-By $HOSTNAME;',
   match => 'http {',
 }
 
--> exec { 'restart':
-  command => 'service nginx restart',
+exec {'restart':
+  command     => 'service nginx restart',
+  refreshonly => true
 }
