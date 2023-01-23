@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Update the system
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.6 -y
+sudo apt-get install haproxy -y
+sudo bash -c 'echo "frontend web-front
+        bind *:80
+        default_backend web-backend
+backend web-backend
+        balance roundrobin
+        server web1 54.165.158.100:80 check
+        server web2 54.209.231.85:80 check
+" >> /etc/haproxy/haproxy.cfg'
+sudo service haproxy start
