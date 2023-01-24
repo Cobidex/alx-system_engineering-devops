@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# show information about subdomain
+display_subdomain_info() {
+  local domain="$1"
+  local subdomain="$2"
+
+  if [ -z "$subdomain" ]; then
+    echo "The subdomain www is a A record and points to $(dig www.$domain +short)"
+    echo "The subdomain lb-01 is a A record and points to $(dig lb-01.$domain +short)"
+    echo "The subdomain web-01 is a A record and points to $(dig web-01.$domain +short)"
+    echo "The subdomain web-02 is a A record and points to $(dig web-02.$domain +short)"
+  else
+    local subdomain_type
+    local subdomain_dest
+    subdomain_type=$(dig "$subdomain.$domain" | awk '$4=="IN" {print $5}')
+    subdomain_dest=$(dig "$subdomain.$domain" +short)
+    echo "The subdomain $subdomain is a $subdomain_type record and points to $subdomain_dest"
+  fi
+}
+
+display_subdomain_info "$1" "$2"
