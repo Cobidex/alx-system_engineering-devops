@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
-# show information about subdomain
-display_subdomain_info() {
-  local domain="$1"
-  local subdomain="$2"
+# show subdomain information
+c_domain() {
+	SUBDOMAINS='www lb-01 web-01 web-02'
 
-  if [ -z "$subdomain" ]; then
-    echo "The subdomain www is a A record and points to $(dig www.$domain +short)"
-    echo "The subdomain lb-01 is a A record and points to $(dig lb-01.$domain +short)"
-    echo "The subdomain web-01 is a A record and points to $(dig web-01.$domain +short)"
-    echo "The subdomain web-02 is a A record and points to $(dig web-02.$domain +short)"
-  else
-    local subdomain_type
-    local subdomain_dest
-    subdomain_type=$(dig "$subdomain.$domain" | awk '$4=="IN" {print $5}')
-    subdomain_dest=$(dig "$subdomain.$domain" +short)
-    echo "The subdomain $subdomain is a $subdomain_type record and points to $subdomain_dest"
-  fi
+	if [ -z "$1" ]; then
+		exit
+	fi
+	# no sub domain specified, do all
+	if [ -z "$2" ]; then
+		echo "$SUBDOMAINS" | awk -v domain="$1"\
+		'BEGIN { RS=" " }
+		{split($0,ARR," ");
+		cmd = "dig " ARR[1]"."domain " | grep -A1 \"ANSWER SECTION:\" | tail -n1";
+		system(cmd)
+		close(cmd)}' | awk\
+		'{
+		split($0, DOMS, ".");
+		print "The subdomain " DOMS[1] " is a " $4 " record and points to " $5}'
+	else
+		dig "$2.$1" | grep -A1 "ANSWER SECTION:" | tail -n1 | awk\
+		'{
+		split($0, DOMS, ".");
+		print "The subdomain " DOMS[1] " is a " $4 " record and points to " $5}'
+	fi
 }
-
-display_subdomain_info "$1" "$2"
+c_domain "$1" "$2"
