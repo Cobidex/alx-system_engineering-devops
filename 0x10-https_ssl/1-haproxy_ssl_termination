@@ -33,10 +33,21 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend web-front
-        bind *:443 ssl crt /etc/letsencrypt/live/chidexaccomodations.tech/
-	option forwardfor
+frontend www-frontend
+	bind *:80
+	reqadd X-Forwarded-Proto:\ http
+	acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+	use_backend le-certbot-backend if letsencrypt-acl
+	default_backend web-backend
+
+
+frontend web-http-front
+        bind *:443 ssl crt /etc/haproxy/certs/chidexaccomodations.tech.pem
+	reqadd X-Forwarded-Proto:\ https
         default_backend web-backend
+
+backend le-certbot-backend
+	server letsencrypt 127.0.0.1:8888
 
 backend web-backend
         balance roundrobin
