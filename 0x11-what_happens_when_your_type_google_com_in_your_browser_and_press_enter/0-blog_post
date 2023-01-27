@@ -1,0 +1,14 @@
+Today on TechTalk
+
+Ever wondered what happens underneath the hood when you type the text “www.google.com
+” into your browser and press enter? If you have then read on as I give you a tour of the amazing processes you set into motion to bring up the Google homepage on your screen!
+First, your computer/Mobile Phone sends a Domain Name System (DNS) request to a DNS server to resolve the domain name “google.com
+” to an IP address. The DNS server looks up the IP address associated with the domain and sends it back to your computer. The IP address is the like the online home address of the Web server where the google page you need resides. This step is important as it saves you the hassle of having to enter a bunch of numbers(IP address) into your browser each time you want to visit a web page.
+Next, your computer uses the Transmission Control Protocol/Internet Protocol (TCP/IP) to establish a connection with the server located at the IP address returned by the DNS server. The connection is established by a “handshake” process, where your browser and server exchange information to ensure that they can communicate with each other.
+Once the connection is established, any barrier(known as a firewall) between your browser and the server will be checked to be sure the connection is allowed. If the connection is blocked by a firewall, the browser will be unable to load the page as the content will not be allowed through.
+After the firewall, the connection is secured with HTTPS (also known as HTTP Secure) and SSL (Secure Sockets Layer) encryption, which encrypts the data exchanged between the browser and the server, protecting it from hackers or other malicious actors who might break into the connection.
+The traffic is then directed to a load balancer, which distributes the incoming requests across multiple servers to ensure that a single server is not overloaded with many requests as Google, a Tech Giant, receives a ton of requests per second!
+The request is then sent to a web server, which is responsible for handling the HTTP request and returning the appropriate HTML, CSS, and JavaScript files to the browser.
+In addition, the web server may communicate with an application server, which runs what’s called “the business logic of the application”, and a database server, which stores and retrieves the data needed to generate the web page.
+Finally, the browser receives the HTML, CSS, and JavaScript files and renders the webpage on your screen, allowing you to interact with the Google homepage as you normally would.
+So you see, what you see on your screen is indeed the tip of amazing machinery!
