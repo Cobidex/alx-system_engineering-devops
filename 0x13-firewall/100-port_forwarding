@@ -1,0 +1,4 @@
+default incoming deny
+default outgoing allow
+redirect 8080:tcp to:80
+sudo ufw enable
