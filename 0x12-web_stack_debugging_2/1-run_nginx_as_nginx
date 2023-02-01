@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # make nginx run as user nginx and set all ports to 8080
 service nginx stop
-sed -i "s/ ipv6only=on//g" /etc/nginx/sites-available/default
+sed -i "s/ipv6only=on//g" /etc/nginx/sites-available/default
 sed -i "s/80/8080/g" /etc/nginx/sites-available/default
 sed -i "/user/i user nginx;" /etc/nginx/nginx.conf
 service nginx restart
