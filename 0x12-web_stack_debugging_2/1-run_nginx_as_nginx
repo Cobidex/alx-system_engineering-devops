@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# make nginx run as user nginx and set all ports to 8080
+sudo service nginx stop
+sed -i "/user/user nginx;/" /etc/nginx/nginx.conf
+sed -i "/80/8080/g" /etc/nginx/sites-available/default
+sudo service nginx restart
