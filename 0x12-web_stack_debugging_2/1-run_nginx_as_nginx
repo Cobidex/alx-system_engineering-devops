@@ -4,4 +4,3 @@ sudo pkill apache2
 sudo chmod 774 /etc/nginx/nginx.conf
 sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
 sudo -u nginx nginx
-service nginx restart
