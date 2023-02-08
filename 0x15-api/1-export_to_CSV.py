@@ -19,5 +19,5 @@ if __name__ == "__main__":
         with open('{}.csv'.format(user), 'w') as f:
             for element in repo.json():
                 f.write('"{}","{}","{}","{}"\n'.
-                               format(user, username, element.get("completed"),
-                                      element.get("title")))
+                        format(user, username, element.get("completed"),
+                               element.get("title")))
