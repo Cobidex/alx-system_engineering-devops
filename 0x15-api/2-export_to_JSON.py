@@ -27,5 +27,5 @@ if __name__ == "__main__":
             cust.append(s)
         todo[user] = cust
 
-        with open('{}.json'.format(user), 'w') as the_file:
-            json.dump(todo, the_file)
+        with open('{}.json'.format(user), 'w') as f:
+            json.dump(todo, f)
