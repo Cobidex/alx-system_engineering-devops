@@ -9,11 +9,12 @@ def recurse(subreddit, hot_list=[], after=""):
     '''
         method to return list of hot articles
     '''
-    header = {'User-Agent': 'Google Chrome 110.0.5481.177 Windows 10'}
+    params = {'show': 'all'}
+    header = {'User-Agent': 'Google Chrome Version 110.0.5481.177'}
     url = 'www.reddit/r/{}/hot/.json?after={}'. format(subreddit, after)
     if subreddit is None or type(subreddit) != str:
         return None
-    response = requests.get(url, header=header)
+    response = requests.get(url, header=header, params=params)
     data = response.json()
     after = data.get('data').get('after')
     if after:
