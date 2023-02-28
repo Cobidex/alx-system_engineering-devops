@@ -11,10 +11,13 @@ def recurse(subreddit, hot_list=[], after=""):
     '''
     params = {'show': 'all'}
     header = {'User-Agent': 'Google Chrome Version 110.0.5481.177'}
-    url = 'www.reddit/r/{}/hot/.json?after={}'. format(subreddit, after)
+    url = 'https://www.reddit/r/{}/hot/.json?after={}'. format(subreddit,
+                                                               after)
     if subreddit is None or type(subreddit) != str:
         return None
     response = requests.get(url, header=header, params=params)
+    if (response.status_code != 200):
+        return None
     data = response.json()
     after = data.get('data').get('after')
     if after:
@@ -22,5 +25,5 @@ def recurse(subreddit, hot_list=[], after=""):
         for t in titles:
             title = t.get('data').get('title')
             hot_list.append(title)
-        recurse(subreddit, hot_list, after)
+        return recurse(subreddit, hot_list, after)
     return hot_list
