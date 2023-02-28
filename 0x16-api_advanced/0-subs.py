@@ -16,12 +16,8 @@ def number_of_subscribers(subreddit):
         return 0
 
     user_agent = {'User-Agent': 'Google Chrome Version 81.0.4044.129'}
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
+    url = 'https://www.reddit.com/r/{}/about.json'. format(subreddit)
     response = requests.get(url, headers=user_agent)
     a_data = response.json()
 
-    try:
-        return a_data.get('data').get('subscribers')
-
-    except ValueError:
-        return 0
+    return a_data.get('data').get('subscribers')
